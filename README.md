@@ -1,6 +1,6 @@
 # Feynman Finder
 
-A Claude Code skill that maps the frontiers of scientific knowledge. Given a research topic, it traces empirical constants, fitted models, and competing theories back to their upstream assumptions — then identifies where the field may have taken a wrong turn. The output is a set of PhD-worthy research directions grounded in genuine gaps in understanding.
+A Claude Code skill for exploring where scientific understanding breaks down. Given a research topic, it looks for empirical constants, fitted models, and competing theories — then tries to trace them back to the upstream assumptions that produced them. Useful for brainstorming research directions or just getting a different angle on a field you're studying.
 
 > "What I cannot create, I do not understand." — Richard Feynman
 
@@ -37,9 +37,9 @@ Given a research topic, Feynman Finder works through five phases:
 3. **Trace** — Walks the assumption tree backward from each empirical parameter to find where first-principles derivation broke down
 4. **Cluster** — Groups breakdowns by shared root assumptions to find the highest-leverage branch points
 5. **Evaluate** — Assesses each branch point: historical context, adjacent field solutions, new tools available
-6. **Synthesize** — Generates ranked PhD research directions with concrete attack vectors
+6. **Synthesize** — Suggests research directions based on what it found
 
-It applies thinking frameworks from Feynman, Einstein, Hamming, Kuhn, and Polya to evaluate which problems are worth working on.
+It uses thinking frameworks from Feynman, Einstein, Hamming, Kuhn, and Polya as lenses for evaluating what might be worth exploring.
 
 ## Output
 
@@ -48,8 +48,8 @@ Reports are written to `reports/` as markdown files. Each report includes:
 - A landscape overview of the field
 - A table of empirical breakdowns (constants, fitted models, competing theories)
 - An assumption tree tracing each breakdown to its root cause
-- Ranked branch points where the field may have gone wrong
-- Concrete PhD research directions with 6-month plans and risk assessments
+- Branch points where the field may have gone wrong
+- Suggested research directions with possible approaches
 - Full references (preferring open-access sources)
 
 ## Example Topics
