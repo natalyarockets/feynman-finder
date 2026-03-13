@@ -27,6 +27,104 @@ where theory couldn't reach. But the constant itself isn't the problem — it's 
 **symptom**. The real question is: what assumption upstream forced researchers to
 abandon first-principles derivation and start fitting?
 
+## Lenses for Finding the Frontier
+
+Apply these thinking frameworks — drawn from scientists and philosophers who were
+exceptionally good at identifying what's worth working on — throughout your analysis.
+They are not sequential steps but **concurrent lenses** to apply at every phase.
+
+### Feynman's Twelve Problems
+> "You have to keep a dozen of your favorite problems constantly present in your
+> mind, although by and large they will lay in a dormant state. Every time you hear
+> or read a new trick or a new result, test it against each of your twelve problems
+> to see whether it helps."
+
+**How to apply**: When you find an empirical breakdown, don't just catalog it. Ask:
+does this connect to any *other* open problems in the field or adjacent fields? A
+breakdown that touches multiple open problems is higher leverage than an isolated one.
+The best PhD topics sit at the intersection of several favorite problems.
+
+### Feynman's Simplicity Test
+> "What is the simplest example?" / "How can you tell if the answer is right?"
+
+**How to apply**: For each suspect assumption, ask: what is the simplest physical
+system where this assumption breaks down? If you can't construct a simple example
+where it fails, maybe the assumption isn't actually wrong — the problem is elsewhere.
+Conversely, if you can find a trivially simple case that the theory can't explain
+from first principles, that's a very strong signal.
+
+### Einstein's Thought Experiments
+Einstein identified important problems by noticing when the *conceptual foundations*
+felt wrong — not just when the math didn't fit. He asked: "What would I observe if
+I rode alongside a beam of light?" He looked for places where two trusted principles
+gave contradictory predictions, then followed the contradiction.
+
+**How to apply**: For each branch point, construct a thought experiment. If I take
+this assumption literally, what absurd or contradictory prediction follows in some
+limiting case? Contradictions between two well-established results that both depend
+on the suspect assumption are gold — they suggest the assumption is papering over a
+deeper inconsistency.
+
+### Einstein's Parsimony
+A good theory requires the minimum number of postulates to account for the evidence.
+When a model requires many free parameters, it's not explaining — it's *fitting*.
+
+**How to apply**: Count the free parameters. A model with 5 fitted constants to
+explain 6 data points is not a theory — it's a curve fit. The ratio of empirical
+parameters to independent predictions is a quantitative measure of how well a
+subfield actually understands its subject.
+
+### Hamming's Question
+> "What are the important problems in your field? Are you working on one of them?
+> Why not?"
+
+Hamming observed that most scientists avoid working on the most important problems
+in their field — often because those problems seem too hard or too risky. He also
+noted: **"It's not the consequence that makes a problem important, it is that you
+have a reasonable attack."**
+
+**How to apply**: After identifying branch points, explicitly ask the Hamming
+question: is this one of the most important open problems in this subfield? If so,
+why hasn't it been solved? If the answer is "because it was too hard with previous
+tools" rather than "because it's fundamentally intractable," that's exactly the kind
+of problem that becomes a PhD when new tools arrive.
+
+Also apply Hamming's reframing advice: **"By changing a problem slightly you can
+often do great work rather than merely good work."** A branch point that seems
+intractable head-on might become tractable if you shift the question slightly.
+
+### Kuhn's Anomaly Accumulation
+Thomas Kuhn observed that scientific revolutions are preceded by a **crisis period**
+where anomalies accumulate — observations that the current paradigm can't explain.
+The community's first instinct is to suppress anomalies with ad hoc patches
+(correction factors, special cases, empirical fits). When the patches outnumber the
+predictions, a paradigm shift is overdue.
+
+**How to apply**: This is the *theoretical justification* for the empirical-constant
+heuristic. Specifically look for:
+- **Proliferating special cases**: The theory works but only with different constants
+  for different regimes — this is the paradigm being stretched past its limits
+- **Ad hoc patches**: Correction factors added after the fact to make theory match
+  experiment, with no independent justification
+- **Defensive language**: Papers that spend significant effort explaining why
+  anomalies don't actually threaten the framework — this is the suppression response
+- **Competing schools**: When a subfield splits into camps with incompatible models,
+  Kuhn says this is the crisis state, immediately preceding revolution
+
+### Polya's Problem Reformulation
+> "If you cannot solve the proposed problem, try to solve first some related problem.
+> Could you imagine a more accessible related problem?"
+
+Polya also emphasized: **understand the problem before solving it**. Many failed
+research programs fail not because the problem is hard but because it's the *wrong
+problem* — the formulation itself contains a hidden contradiction or false constraint.
+
+**How to apply**: When tracing an assumption tree backward, ask at each node: is
+this assumption constraining the solution space unnecessarily? Would removing it
+change not just the answer but the *question*? The most productive PhD topics often
+come from realizing that everyone has been solving the wrong problem — that the real
+question is upstream of where the community is looking.
+
 ## Input
 
 The user provides a research topic: `$ARGUMENTS`
@@ -224,6 +322,111 @@ At the end of the references section, include this notice:
 > (IEEE, AIAA, Elsevier, Springer, etc.) may not be reflected here. The
 > conclusions should be validated against the full literature before committing
 > to a research direction.
+
+---
+
+## Research Cache
+
+All research must be cached to `research-cache/` so it survives conversation
+interruptions, context compression, and session boundaries. This is critical —
+web fetches are ephemeral and expensive to repeat.
+
+### During research, save as you go:
+
+1. **Source extracts**: For each paper, lecture, or thesis you fetch, immediately
+   write a summary to `research-cache/[topic-slug]/sources/[author-year].md` with:
+   ```
+   # [Full citation]
+   URL: [url]
+   Accessed: [date]
+
+   ## Key equations
+   [extracted equations with parameter classifications]
+
+   ## Assumptions stated
+   [list]
+
+   ## Empirical parameters identified
+   [list with context]
+
+   ## Limitations acknowledged by authors
+   [list]
+
+   ## Relevant quotes
+   [verbatim quotes with page/section references]
+   ```
+
+2. **Search logs**: Save web search queries and top results to
+   `research-cache/[topic-slug]/searches.md` so you don't repeat searches.
+   Append to this file as you go.
+
+3. **Working notes**: Save intermediate analysis (assumption trees, clusters,
+   open questions) to `research-cache/[topic-slug]/working-notes.md` as you
+   progress through phases. This lets you resume if interrupted.
+
+### On resumption or follow-up questions:
+
+Before doing any new web searches, **check the research cache first**:
+- Read `research-cache/[topic-slug]/searches.md` to avoid duplicate searches
+- Read `research-cache/[topic-slug]/sources/` to recall what you've already extracted
+- Read `research-cache/[topic-slug]/working-notes.md` to pick up where you left off
+
+### Cache structure:
+```
+research-cache/
+└── [topic-slug]/
+    ├── searches.md          # log of all queries + top results
+    ├── working-notes.md     # intermediate analysis, assumption trees
+    └── sources/
+        ├── iribarne-1976.md
+        ├── coffman-2016.md
+        └── ...
+```
+
+---
+
+## Follow-Up and Iteration
+
+After delivering the initial report, expect the user to probe deeper. Handle this
+efficiently using the research cache:
+
+### Recognizing follow-up vs. new topic
+- If the user asks a question about the report's content, a specific branch point,
+  or a specific research direction — this is a follow-up. Read the cache first.
+- If the user provides a completely new topic — start fresh with Phase 0.
+
+### Follow-up workflow
+1. **Read the cache first**: Check `research-cache/[topic-slug]/` for existing
+   sources, searches, and working notes before doing any new web searches.
+2. **Do targeted research**: Only search for what's specifically needed to answer
+   the user's question. Don't re-survey the whole field.
+3. **Update the cache**: Append new searches to `searches.md`, add new source
+   extracts, update `working-notes.md` with new findings.
+4. **Update the report if warranted**: If the follow-up changes the analysis
+   (e.g., new tool viability, corrected assumption), edit the report in place
+   and note the update date. Don't rewrite the whole report — make surgical edits.
+
+### Common follow-up patterns
+- **"Has anything changed with X?"** — Search for recent advances in X, assess
+  impact on the relevant branch point, update report if material.
+- **"What about [adjacent field]?"** — Search that field for analogous solutions,
+  add to the cross-pollination analysis.
+- **"I disagree with Y"** — The user knows the field. Listen, update the analysis,
+  note the correction in working-notes.md. Their domain expertise overrides
+  web search results.
+- **"Go deeper on direction N"** — Expand that direction: more detailed approach,
+  specific computational/experimental methods, literature on the sub-technique,
+  potential advisors/groups working in the space.
+- **"What would the first 6 months look like?"** — Produce a concrete research
+  plan: literature review scope, tool setup, first calculations/experiments,
+  milestones, decision points.
+
+### Keeping the conversation efficient
+- Don't re-explain what's already in the report. Reference it: "As noted in the
+  report (Branch Point 2)..."
+- When the user corrects you, update quickly and move on. Don't be defensive.
+- If a follow-up requires substantial new research (>5 searches), say so and
+  give an estimate before diving in.
 
 ---
 
